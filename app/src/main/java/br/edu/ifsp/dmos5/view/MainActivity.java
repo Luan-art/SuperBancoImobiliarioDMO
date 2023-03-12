@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) throws NumberFormatException {
 
         int cardId;
         double value;
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         StarBank.getInstance().pay(card, value);
                         Toast.makeText(MainActivity.this, "Pagamento realizado.", Toast.LENGTH_SHORT).show();
+
                         textValueOpe.setText("");
                         textCard3.setText("");
 
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         StarBank.getInstance().receive(card,value);
                         Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
+
                         textValueOpe.setText("");
                         textCard3.setText("");
 
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         StarBank.getInstance().roundCompleted(card, value);
                         Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
+
                         textValueOpe.setText("");
                         textCard3.setText("");
 

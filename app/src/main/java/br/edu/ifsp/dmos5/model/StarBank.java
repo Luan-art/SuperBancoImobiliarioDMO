@@ -5,6 +5,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifsp.dmos5.view.MainActivity;
+
 public class StarBank {
 
     private ArrayList<CreditCard> cards = new ArrayList<>();
@@ -32,8 +34,8 @@ public class StarBank {
         CreditCard card;
         try {
             card = cards.get(id);
-        } catch (NumberFormatException e){
-            throw new NumberFormatException("Valor invalido");
+        } catch (IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Valor invalido");
         }
 
         return card;
@@ -64,8 +66,17 @@ public class StarBank {
     }
 
     public boolean pay(CreditCard card, double value){
+
+        double valoInicial = card.getBalance();
         card.debitValue(value);
-        return true;
+
+        if(valoInicial != card.getBalance()){
+
+            return true;
+        }
+
+
+        return false;
     }
 }
 
