@@ -1,8 +1,13 @@
 package br.edu.ifsp.dmos5.model;
 
+import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class StarBank {
+
+    private ArrayList<CreditCard> cards = new ArrayList<>();
 
     private static StarBank instance = null;
 
@@ -17,31 +22,49 @@ public class StarBank {
 
     public void startCreditCards(){
 
-        List<CreditCard>cards = null;
-        CreditCard card = null;
-
         for(int i = 0; i<6; i++){
-            card = new CreditCard();
-            cards.add(card);
-            card = null;
+            cards.add(new CreditCard());
         }
 
-
     }
+
+    public CreditCard getCard( int id){
+        CreditCard card;
+        try {
+            card = cards.get(id);
+        } catch (NumberFormatException e){
+            throw new NumberFormatException("Valor invalido");
+        }
+
+        return card;
+    }
+
 
     public void roundCompleted(CreditCard card, double value){
-
+        card.creditValue(value);
     }
 
-    public boolean transfer (CreditCard card1, CreditCard card2, double value){
+    public boolean transfer (CreditCard player, CreditCard receiver, double value) throws NumberFormatException{
+
+        double playerIncial = player.getBalance();
+        double receiverInicial = receiver.getBalance();
+
+        player.creditValue(value);
+        receiver.debitValue(value);
+
+        if( player.getBalance() == playerIncial && receiver.getBalance() == receiverInicial){
+             return false;
+        }
+
         return true;
     }
 
     public void receive(CreditCard card, double value){
-
+        card.creditValue(value);
     }
 
     public boolean pay(CreditCard card, double value){
+        card.debitValue(value);
         return true;
     }
 }

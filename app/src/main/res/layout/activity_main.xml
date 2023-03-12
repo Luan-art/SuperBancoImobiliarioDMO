@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@color/background_main_activity"
     tools:context=".view.MainActivity">
 
     <TextView
@@ -14,10 +15,20 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:text="BANCO IMOBILIARIO"
-        android:textColor="#000000"
+        android:text="@string/tittle"
+        android:textColor="@color/fontTitller"
         android:textSize="30dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/transfer"
+        android:textColor="@color/fontTitller"
+        android:textSize="15dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,11 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Cartão1"
+            android:textColor="@color/fonte_color"
+            android:text="@string/player"
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/text_card1"
+            android:id="@+id/textCard1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -48,11 +60,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Cartão2"
+            android:textColor="@color/fonte_color"
+            android:text="@string/receiver"
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/text_card2"
+            android:id="@+id/textCard2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -70,7 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Valor"
+            android:textColor="@color/fonte_color"
+            android:text="@string/value"
             android:textSize="20dp"/>
 
         <EditText
@@ -89,8 +103,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#0DED16"
-        android:text="Transferencia" />
+        android:backgroundTint="@color/ButtonColor"
+        android:text="@string/Buttontra" />
 
 
     <LinearLayout
@@ -102,11 +116,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Cartão"
+            android:textColor="@color/fonte_color"
+            android:text="@string/card"
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/text_card3"
+            android:id="@+id/textCard3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/fonte_color"
+            android:text="@string/value"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/textValor2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -125,29 +163,40 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/convert_para_celsius"
-            android:text="Receber"
+            android:id="@+id/receber"
+            android:textColor="@color/fonte_color"
+            android:text="@string/RadioR"
             />
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/convert_para_Fahrenheit"
-            android:text="Pagar"/>
+            android:id="@+id/pagar"
+            android:textColor="@color/fonte_color"
+            android:text="@string/RadioP"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complet_rodad"
+            android:textColor="@color/fonte_color"
+            android:text="@string/RadioC"/>
+
+
 
 
     </RadioGroup>
 
     <Button
-        android:id="@+id/Operacao"
+        android:id="@+id/buttonOpe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#0DED16"
-        android:text="RealizarOperação" />
+        android:backgroundTint="@color/ButtonColor"
+        android:text="@string/ButtonOpe" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -158,11 +207,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Cartão"
+            android:textColor="@color/fonte_color"
+            android:text="@string/card"
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/text_card4"
+            android:id="@+id/textCard4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -179,7 +229,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="#0DED16"
-        android:text="Mostrar Saldo" />
+        android:text="@string/Button" />
 
     <TextView
         android:id="@+id/text_view_converted"
@@ -187,7 +237,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:textColor="#DCC820"
+        android:textColor="@color/ButtonColor"
         android:textSize="50dp"
         />
 
