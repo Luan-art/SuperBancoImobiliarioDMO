@@ -13,5 +13,13 @@
     <string name="RadioP">Pagar</string>
     <string name="RadioC">Rodada Completa</string>
 
+    <string-array name="cardId">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 
 </resources>

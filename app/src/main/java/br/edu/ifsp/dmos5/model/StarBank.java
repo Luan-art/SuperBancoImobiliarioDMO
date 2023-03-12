@@ -1,5 +1,6 @@
 package br.edu.ifsp.dmos5.model;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,11 +33,8 @@ public class StarBank {
 
     public CreditCard getCard( int id){
         CreditCard card;
-        try {
-            card = cards.get(id);
-        } catch (IndexOutOfBoundsException e){
-            throw new IndexOutOfBoundsException("Valor invalido");
-        }
+
+        card = cards.get(id);
 
         return card;
     }

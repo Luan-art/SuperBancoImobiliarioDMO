@@ -42,12 +42,10 @@
             android:text="@string/player"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/textCard1"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textAlignment="center" />
+            android:id="@+id/cartdsSpiner"/>
 
     </LinearLayout>
 
@@ -64,12 +62,10 @@
             android:text="@string/receiver"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/textCard2"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textAlignment="center" />
+            android:id="@+id/cartdsSpinerReceiver"/>
 
     </LinearLayout>
 
@@ -120,12 +116,11 @@
             android:text="@string/card"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/textCard3"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textAlignment="center" />
+            android:id="@+id/cartdsSpinerOper"/>
+
 
     </LinearLayout>
 
@@ -211,12 +206,11 @@
             android:text="@string/card"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/textCard4"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textAlignment="center" />
+            android:id="@+id/cartdsSpinerVal"/>
+
 
     </LinearLayout>
 

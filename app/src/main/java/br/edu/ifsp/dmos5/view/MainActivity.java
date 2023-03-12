@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,10 +18,10 @@ import br.edu.ifsp.dmos5.model.StarBank;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText textCard1;
-    private EditText textCard2;
-    private EditText textCard3;
-    private EditText textCard4;
+    private Spinner textCard1;
+    private Spinner textCard2;
+    private Spinner textCard3;
+    private Spinner textCard4;
 
     private EditText textValue;
 
@@ -39,10 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getSupportActionBar().hide();
         }
 
-        textCard1 = findViewById(R.id.textCard1);
-        textCard2 = findViewById(R.id.textCard2);
-        textCard3 = findViewById(R.id.textCard3);
-        textCard4 = findViewById(R.id.textCard4);
+        textCard1 = findViewById(R.id.cartdsSpiner);
+        textCard2 = findViewById(R.id.cartdsSpinerReceiver);
+        textCard3 = findViewById(R.id.cartdsSpinerOper);
+        textCard4 = findViewById(R.id.cartdsSpinerVal);
         textValue = findViewById(R.id.text_valor);
         textValueOpe = findViewById(R.id.textValor2);
         buttonOpe = findViewById(R.id.buttonOpe);
@@ -56,6 +58,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         StarBank.getInstance().startCreditCards();
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.cardId, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        textCard1.setAdapter(adapter);
+        textCard2.setAdapter(adapter);
+        textCard3.setAdapter(adapter);
+        textCard4.setAdapter(adapter);
+
 
     }
 
@@ -66,14 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int cardId;
         double value;
         String textV;
-        String textID;
 
         if(view == buttonOpe){
 
             textV = textValueOpe.getText().toString();
-            textID = textCard3.getText().toString();
+            cardId = textCard3.getSelectedItemPosition();
 
-            cardId = Integer.valueOf(textID);
             value = Double.valueOf(textV);
 
             CreditCard card = StarBank.getInstance().getCard(cardId);
@@ -85,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "Pagamento realizado.", Toast.LENGTH_SHORT).show();
 
                         textValueOpe.setText("");
-                        textCard3.setText("");
+
 
                     break;
 
@@ -95,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
 
                         textValueOpe.setText("");
-                        textCard3.setText("");
 
 
                     break;
@@ -105,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
 
                         textValueOpe.setText("");
-                        textCard3.setText("");
 
 
                     break;
@@ -115,27 +123,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(view == buttonTra){
 
-            String textId2;
-            int cardId1;
+            int cardId2;
 
             textV = textValue.getText().toString();
-            textID = textCard1.getText().toString();
-            textId2 = textCard2.getText().toString();
+            cardId = textCard1.getSelectedItemPosition();
+            cardId2 = textCard2.getSelectedItemPosition();
 
-            cardId = Integer.valueOf(textID);
             value = Double.valueOf(textV);
-            cardId1 = Integer.valueOf(textId2);
 
             CreditCard player = StarBank.getInstance().getCard(cardId);
-            CreditCard receiver = StarBank.getInstance().getCard(cardId1);
+            CreditCard receiver = StarBank.getInstance().getCard(cardId2);
 
 
             StarBank.getInstance().transfer(player, receiver, value);
             Toast.makeText(MainActivity.this, "Transferencia Realizada.", Toast.LENGTH_SHORT).show();
 
             textValue.setText("");
-            textCard1.setText("");
-            textCard2.setText("");
 
 
         }
@@ -143,19 +146,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(view == buttonValor){
 
-            textID = textCard4.getText().toString();
-            cardId = Integer.valueOf(textID);
+            cardId = textCard4.getSelectedItemPosition();
             CreditCard cardValor = StarBank.getInstance().getCard(cardId);
 
 
             mostrarSaldo.setText(String.format("$ %.2f", cardValor.getBalance()));
 
-            textCard4.setText("");
-
-
-
         }
-
 
     }
     
