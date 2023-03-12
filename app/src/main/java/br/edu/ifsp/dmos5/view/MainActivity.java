@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import br.edu.ifsp.dmos5.R;
 import br.edu.ifsp.dmos5.model.CreditCard;
+import br.edu.ifsp.dmos5.model.InvalidValueException;
 import br.edu.ifsp.dmos5.model.StarBank;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -56,8 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonTra.setOnClickListener(this);
         buttonValor.setOnClickListener(this);
 
+        //criação dos cartões
         StarBank.getInstance().startCreditCards();
 
+        //Opções dos Spinners
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.cardId, android.R.layout.simple_spinner_item);
 
@@ -79,41 +82,98 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         double value;
         String textV;
 
+        //ButtonsListeners
+        //Transferências
+        if(view == buttonTra){
+
+            int cardId2;
+
+
+            textV = textValue.getText().toString();
+            cardId = textCard1.getSelectedItemPosition();
+            cardId2 = textCard2.getSelectedItemPosition();
+
+            //Tratamento de NumberFormatException
+            try {
+                value = Double.parseDouble(textV);
+            } catch (NumberFormatException e){
+                throw new RuntimeException("Error");
+            }
+
+            //recuperação dos cartões
+            CreditCard player = StarBank.getInstance().getCard(cardId);
+            CreditCard receiver = StarBank.getInstance().getCard(cardId2);
+
+            //chamada de transferencia e tratamento de erros
+            try {
+                StarBank.getInstance().transfer(player, receiver, value);
+                Toast.makeText(MainActivity.this, "Transferencia Realizada.", Toast.LENGTH_SHORT).show();
+
+            } catch (InvalidValueException e) {
+                Toast.makeText(MainActivity.this, "Saúdo Insuficente.", Toast.LENGTH_SHORT).show();
+            }
+
+            textValue.setText("");
+
+
+        }
+
         if(view == buttonOpe){
 
             textV = textValueOpe.getText().toString();
+            //recuperação de Id
+
             cardId = textCard3.getSelectedItemPosition();
 
-            value = Double.valueOf(textV);
+            //Tratamento de NumberFormatException
 
+            try {
+                value = Double.parseDouble(textV);
+            } catch (NumberFormatException e){
+                throw new RuntimeException("Error");
+            }
+
+            //Recuperação de cartão
             CreditCard card = StarBank.getInstance().getCard(cardId);
 
+            //leitura de RadioButton
+
             switch (grupoOp.getCheckedRadioButtonId()){
+
+                //opcão pagar e tratamento de erros caso saudo insuficiente
                 case R.id.pagar:
 
+                    try {
                         StarBank.getInstance().pay(card, value);
                         Toast.makeText(MainActivity.this, "Pagamento realizado.", Toast.LENGTH_SHORT).show();
 
+                    } catch (InvalidValueException e) {
+                        Toast.makeText(MainActivity.this, "Saúdo insuficiente.", Toast.LENGTH_SHORT).show();
+                    }
+
                         textValueOpe.setText("");
 
-
                     break;
+
+                //opcão receber
 
                 case R.id.receber:
 
-                        StarBank.getInstance().receive(card,value);
-                        Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
+                    StarBank.getInstance().receive(card,value);
+                    Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
 
-                        textValueOpe.setText("");
+                    textValueOpe.setText("");
 
 
                     break;
+
+                //opcão Rodada completa
                 case R.id.complet_rodad:
 
-                        StarBank.getInstance().roundCompleted(card, value);
-                        Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
+                     StarBank.getInstance().roundCompleted(card, value);
+                     Toast.makeText(MainActivity.this, "Valor recebido.", Toast.LENGTH_SHORT).show();
 
-                        textValueOpe.setText("");
+                     textValueOpe.setText("");
 
 
                     break;
@@ -121,29 +181,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
-        if(view == buttonTra){
 
-            int cardId2;
-
-            textV = textValue.getText().toString();
-            cardId = textCard1.getSelectedItemPosition();
-            cardId2 = textCard2.getSelectedItemPosition();
-
-            value = Double.valueOf(textV);
-
-            CreditCard player = StarBank.getInstance().getCard(cardId);
-            CreditCard receiver = StarBank.getInstance().getCard(cardId2);
-
-
-            StarBank.getInstance().transfer(player, receiver, value);
-            Toast.makeText(MainActivity.this, "Transferencia Realizada.", Toast.LENGTH_SHORT).show();
-
-            textValue.setText("");
-
-
-        }
-
-
+        //Visualização do saúdo dos cartões
         if(view == buttonValor){
 
             cardId = textCard4.getSelectedItemPosition();

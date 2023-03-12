@@ -14,33 +14,26 @@ public class CreditCard {
         this.setBalance(15000);
     }
 
-    public void creditValue(double value){
+    //função de crédito
+    public void creditValue(double value) {
 
-        try{
-            if (getBalance()  > 0){
-
-                setBalance(getBalance() + value);
-            }
-        }catch (NumberFormatException e){
-            throw new NumberFormatException("Valor invalido");
-        }
+           setBalance(getBalance() + value);
 
     }
 
-    public void debitValue(double value){
-        try{
-            if (value < getBalance() ){
+    //função de debito
+    public void debitValue(double value) throws InvalidValueException {
+            //verificar se o saldo é maior que o valor debitado
+            if (value > getBalance() ){
 
-               setBalance(getBalance() - value);
+                throw new InvalidValueException("Saldo insuficiente");
+
+            }else {
+
+                setBalance(getBalance() - value);
+
             }
-        }catch (NumberFormatException e){
-            throw new NumberFormatException("Saldo insuficiente");
-        }
 
-    }
-
-    public int getId(){
-        return id;
     }
 
     public double getBalance(){

@@ -24,13 +24,14 @@ public class StarBank {
     }
 
     public void startCreditCards(){
-
+        //criação de 6 cartões
         for(int i = 0; i<6; i++){
             cards.add(new CreditCard());
         }
 
     }
 
+    //Recuperar um cartão na lista de cartões pelo seu ID;
     public CreditCard getCard( int id){
         CreditCard card;
 
@@ -44,14 +45,17 @@ public class StarBank {
         card.creditValue(value);
     }
 
-    public boolean transfer (CreditCard player, CreditCard receiver, double value) throws NumberFormatException{
 
+    public boolean transfer (CreditCard player, CreditCard receiver, double value) throws InvalidValueException{
+        //variaveis de controle de transferencia
         double playerIncial = player.getBalance();
         double receiverInicial = receiver.getBalance();
 
-        player.creditValue(value);
-        receiver.debitValue(value);
+        //transferencia
+        player.debitValue(value);
+        receiver.creditValue(value);
 
+        //confirmação de transferencia
         if( player.getBalance() == playerIncial && receiver.getBalance() == receiverInicial){
              return false;
         }
@@ -63,11 +67,12 @@ public class StarBank {
         card.creditValue(value);
     }
 
-    public boolean pay(CreditCard card, double value){
-
+    public boolean pay(CreditCard card, double value) throws InvalidValueException {
+        //variaveis de controle
         double valoInicial = card.getBalance();
         card.debitValue(value);
 
+        //confirmação de pagamento
         if(valoInicial != card.getBalance()){
 
             return true;
